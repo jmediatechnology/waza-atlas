@@ -1,0 +1,23 @@
+parameters:
+    app.motion_dir: '%kernel.project_dir%/var/motions'
+    app.seed_motion_dir: '%kernel.project_dir%/data/motions'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        bind:
+            string $motionDir: '%app.motion_dir%'
+            string $seedMotionDir: '%app.seed_motion_dir%'
+            string $uploadToken: '%env(MOTION_UPLOAD_TOKEN)%'
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+when@test:
+    parameters:
+        app.motion_dir: '%kernel.project_dir%/var/test-motions'

@@ -1,0 +1,262 @@
+{
+ "format": "keyframes",
+ "version": 1,
+ "source": "Hand-keyed placeholder",
+ "duration": 5,
+ "phases": [
+  {
+   "t": 0,
+   "name": "Kumikata",
+   "en": "Gripping",
+   "text": "Both players hold a right-handed grip: lapel in the right hand, sleeve in the left."
+  },
+  {
+   "t": 1.2,
+   "name": "Kuzushi",
+   "en": "Breaking balance",
+   "text": "Uke steps forward on the right foot. Tori times the entry for the moment before uke’s weight settles on that foot."
+  },
+  {
+   "t": 1.7,
+   "name": "Tsukuri",
+   "en": "Entry",
+   "text": "Tori drops onto the left knee, keeps the right hand on the lapel and reaches the left hand behind uke’s right heel."
+  },
+  {
+   "t": 2.3,
+   "name": "Kake",
+   "en": "Execution",
+   "text": "Tori lifts the heel toward their own body while the right hand drives uke’s chest backward. With one leg taken away, uke has nothing to stand on."
+  },
+  {
+   "t": 3,
+   "name": "Ukemi",
+   "en": "Breakfall",
+   "text": "Uke falls straight back, tucks the chin and slaps the mat with both arms."
+  }
+ ],
+ "tracks": {
+  "tori": [
+   [
+    0,
+    {
+     "z": -0.45,
+     "pitch": 6,
+     "bend": 8,
+     "lKnee": 16,
+     "rKnee": 16,
+     "lHipF": 9,
+     "rHipF": 9,
+     "lShF": 50,
+     "lElb": 60,
+     "rShF": 55,
+     "rElb": 70,
+     "ik_l_sleeve": 1,
+     "ik_r_lapel": 1
+    }
+   ],
+   [
+    0.9,
+    {
+     "x": 0.02
+    }
+   ],
+   [
+    1.45,
+    {
+     "z": -0.43,
+     "x": 0.04,
+     "rHipF": 32,
+     "rKnee": 40,
+     "lHipF": 8,
+     "lKnee": 32,
+     "pitch": 10,
+     "bend": 20
+    }
+   ],
+   [
+    1.95,
+    {
+     "x": 0.07,
+     "z": -0.42,
+     "pitch": 15,
+     "bend": 52,
+     "head": -20,
+     "rHipF": 98,
+     "rKnee": 96,
+     "lHipF": 25,
+     "lKnee": 100,
+     "lShF": 65,
+     "lElb": 5,
+     "rShF": 150,
+     "rElb": 30,
+     "ik_l_sleeve": 0,
+     "ik_l_heel": 1
+    }
+   ],
+   [
+    2.5,
+    {
+     "bend": 40,
+     "z": -0.38,
+     "head": -15,
+     "rShF": 190,
+     "rElb": 5
+    }
+   ],
+   [
+    3.05,
+    {
+     "bend": 32
+    }
+   ],
+   [
+    3.5,
+    {
+     "ik_l_heel": 0,
+     "lShF": 50,
+     "lElb": 50,
+     "ik_r_lapel": 0.5,
+     "bend": 28
+    }
+   ],
+   [
+    4.4,
+    {
+     "bend": 20,
+     "rHipF": 90,
+     "rKnee": 84,
+     "lKnee": 96,
+     "ik_r_lapel": 0.3,
+     "rShF": 70,
+     "rElb": 40,
+     "head": 0
+    }
+   ],
+   [
+    5,
+    {}
+   ]
+  ],
+  "uke": [
+   [
+    0,
+    {
+     "z": 0.45,
+     "yaw": 180,
+     "pitch": 4,
+     "bend": 7,
+     "lKnee": 16,
+     "rKnee": 16,
+     "lHipF": 9,
+     "rHipF": 9,
+     "lShF": 55,
+     "lElb": 70,
+     "rShF": 50,
+     "rElb": 60,
+     "ik_r_lapel": 1,
+     "ik_l_sleeve": 1
+    }
+   ],
+   [
+    0.9,
+    {}
+   ],
+   [
+    1.5,
+    {
+     "z": 0.41,
+     "rHipF": 22,
+     "rKnee": 10,
+     "lHipF": -8,
+     "lKnee": 14,
+     "pitch": 2
+    }
+   ],
+   [
+    1.95,
+    {
+     "rHipF": 24,
+     "rKnee": 8,
+     "pitch": 0,
+     "head": 5
+    }
+   ],
+   [
+    2.45,
+    {
+     "pitch": -24,
+     "bend": -8,
+     "z": 0.5,
+     "rHipF": 16,
+     "rKnee": 10,
+     "lHipF": 14,
+     "lKnee": 30,
+     "ik_r_lapel": 0.3,
+     "ik_l_sleeve": 0.3,
+     "lShF": 75,
+     "lShA": 35,
+     "lElb": 30,
+     "rShF": 70,
+     "rShA": 35,
+     "rElb": 30,
+     "head": 18
+    }
+   ],
+   [
+    2.95,
+    {
+     "pitch": -58,
+     "bend": 6,
+     "z": 0.75,
+     "rHipF": 12,
+     "rKnee": 15,
+     "lHipF": -20,
+     "lKnee": 70,
+     "ik_r_lapel": 0,
+     "ik_l_sleeve": 0,
+     "lShF": 45,
+     "lShA": 55,
+     "lElb": 15,
+     "rShF": 45,
+     "rShA": 55,
+     "rElb": 15,
+     "head": 35
+    }
+   ],
+   [
+    3.4,
+    {
+     "pitch": -90,
+     "bend": 12,
+     "z": 1.02,
+     "rHipF": 45,
+     "rKnee": 28,
+     "lHipF": 35,
+     "lKnee": 52,
+     "lShF": 25,
+     "lShA": 48,
+     "lElb": 5,
+     "rShF": 25,
+     "rShA": 48,
+     "rElb": 5,
+     "head": 42
+    }
+   ],
+   [
+    4.4,
+    {
+     "rHipF": 30,
+     "lHipF": 20,
+     "rKnee": 35,
+     "lKnee": 45,
+     "head": 30
+    }
+   ],
+   [
+    5,
+    {}
+   ]
+  ]
+ }
+}

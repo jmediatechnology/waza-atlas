@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Waza Atlas</title>
+<meta name="description" content="Search all 100 Kodokan judo techniques and watch them as 3D point-light motion.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Shippori+Mincho+B1:wght@500;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%274%27 fill=%27%232741B0%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%275%27 fill=%27white%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/assets/atlas.css">
+<script src="/assets/atlas.js" defer></script>
+</head>
+<body data-initial-slug="{{ initialSlug ?? '' }}">
+<header class="top">
+  <div class="seal" aria-hidden="true">技</div>
+  <div class="brand">
+    <h1>Waza Atlas</h1>
+    <p>The 100 Kodokan techniques, with point-light motion</p>
+  </div>
+</header>
+
+<div class="app">
+  <aside class="catalog" aria-label="Technique catalogue">
+    <label class="search">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <input id="q" type="search" placeholder="Search: te waza, kibisu, heel, 踵…" autocomplete="off" aria-label="Search techniques">
+    </label>
+    <div class="fam" id="fam" role="group" aria-label="Family"></div>
+    <div class="chips" id="chips" role="group" aria-label="Category"></div>
+    <button class="callout" id="callout" type="button" hidden>
+      <span><b id="calloutName"></b> has a recorded motion. Open it to see the viewer.</span>
+      <span aria-hidden="true">→</span>
+    </button>
+    <div class="list" id="list" aria-live="polite"><div class="empty-list">Loading techniques…</div></div>
+  </aside>
+
+  <main class="detail" id="detail">
+    <button class="back" id="back" type="button">← All techniques</button>
+    <div>
+      <div class="crumb" id="crumb"></div>
+      <div class="title"><h2 id="dName"></h2><span class="kanji" id="dKanji"></span></div>
+      <p class="sub" id="dEn"></p>
+      <div class="badges" id="dBadges"></div>
+    </div>
+
+    <div class="stage" id="stage">
+      <canvas id="cv" aria-label="Point-light animation of the technique. Drag to rotate the view."></canvas>
+      <div class="ov phase" id="ovPhase"><b></b><span></span></div>
+      <div class="ov time" id="ovTime"></div>
+      <div class="ov legend"><span><i style="background:var(--tori)"></i>Tori · white gi</span><span><i style="background:var(--uke)"></i>Uke · blue gi</span></div>
+      <div class="ov hint" id="ovHint">Drag to orbit · scroll to zoom</div>
+      <div class="ov nomo" id="ovNomo" hidden><b id="nomoTitle">No motion recorded yet</b><span id="nomoText">Showing both players in shizentai as a placeholder.</span></div>
+    </div>
+
+    <div class="controls">
+      <button class="play" id="play" type="button" aria-label="Pause"></button>
+      <span class="ctl"><span class="ctl-label">Speed</span><span class="seg" id="speed">
+        <button type="button" data-v="0.25">¼×</button><button type="button" data-v="0.5">½×</button><button type="button" data-v="1">1×</button></span></span>
+      <span class="ctl"><span class="ctl-label">View</span><span class="seg" id="views">
+        <button type="button" data-v="side">Side</button><button type="button" data-v="front">Front</button><button type="button" data-v="top">Top</button></span></span>
+      <label class="tog"><input type="checkbox" id="bones"> Bones</label>
+      <label class="tog"><input type="checkbox" id="trails" checked> Trails</label>
+    </div>
+
+    <div class="timeline" id="timeline">
+      <div class="phases" id="phases"></div>
+      <input type="range" id="scrub" min="0" max="5" step="0.01" value="0" aria-label="Timeline">
+    </div>
+
+    <div class="cols">
+      <section>
+        <h4>How it's done</h4>
+        <ol class="steps" id="steps"></ol>
+      </section>
+      <section>
+        <h4>Facts</h4>
+        <dl class="facts" id="facts"></dl>
+        <p class="note" id="srcNote"></p>
+      </section>
+    </div>
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+# Production: code baked into the image, data on a named volume.
+#   APP_SECRET=$(openssl rand -hex 32) MOTION_UPLOAD_TOKEN=$(openssl rand -hex 24) \
+#   SERVER_NAME=waza.example.com \
+#   docker compose -f compose.yaml -f compose.prod.yaml up -d --build
+services:
+  app:
+    build:
+      context: .
+      target: frankenphp_prod
+    environment:
+      APP_SECRET: ${APP_SECRET:?Set APP_SECRET, e.g. APP_SECRET=$(openssl rand -hex 32)}
+      # Point at Postgres or MySQL instead of the bundled SQLite file if you prefer:
+      # DATABASE_URL: postgresql://waza:secret@db:5432/waza?serverVersion=17&charset=utf8
+    volumes:
+      - storage:/srv/storage
+    ports:
+      # With a real domain in SERVER_NAME, Caddy redirects HTTP to HTTPS and gets a certificate itself.
+      - target: 80
+        published: ${HTTP_PORT:-80}
+        protocol: tcp
+      - target: 443
+        published: ${HTTPS_PORT:-443}
+        protocol: tcp
+      - target: 443
+        published: ${HTTP3_PORT:-443}
+        protocol: udp
+
+volumes:
+  storage:

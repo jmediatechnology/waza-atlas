@@ -67,7 +67,12 @@ final class SeedCommand extends Command
         $io->writeln(sprintf('Techniques: %d created, %d updated.', $created, $updated));
 
         $loaded = 0;
-        foreach (glob($this->seedMotionDir.'/*.{json,bvh,c3d}', \GLOB_BRACE) ?: [] as $file) {
+        // No GLOB_BRACE: it does not exist on musl-based systems such as Alpine.
+        foreach (glob($this->seedMotionDir.'/*') ?: [] as $file) {
+            $format = MotionFormat::fromFilename($file);
+            if (null === $format || !is_file($file)) {
+                continue;
+            }
             $slug = pathinfo($file, \PATHINFO_FILENAME);
             $technique = $this->techniques->findOneBy(['slug' => $slug]);
             if (null === $technique) {
@@ -77,7 +82,7 @@ final class SeedCommand extends Command
             if (null !== $technique->getMotion() && !$input->getOption('replace-motions')) {
                 continue;
             }
-            $this->motions->store($technique, MotionFormat::fromFilename($file), (string) file_get_contents($file));
+            $this->motions->store($technique, $format, (string) file_get_contents($file));
             ++$loaded;
         }
         $io->writeln(sprintf('Motions: %d loaded from %s.', $loaded, basename($this->seedMotionDir)));

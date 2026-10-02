@@ -2,6 +2,9 @@ doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
     orm:
+        # PHP 8.4 native lazy objects instead of generated proxy classes. Required from
+        # Doctrine ORM 4, and without it ORM 3 needs symfony/var-exporter < 8 for its proxies.
+        enable_native_lazy_objects: true
         validate_xml_mapping: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true

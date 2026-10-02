@@ -1,5 +1,7 @@
 parameters:
-    app.motion_dir: '%kernel.project_dir%/var/motions'
+    app.default_motion_dir: '%kernel.project_dir%/var/motions'
+    # Uploaded motion files. Point MOTION_DIR at a persistent volume in production.
+    app.motion_dir: '%env(default:app.default_motion_dir:MOTION_DIR)%'
     app.seed_motion_dir: '%kernel.project_dir%/data/motions'
 
 services:

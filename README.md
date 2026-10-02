@@ -7,21 +7,81 @@ Search all 100 Kodokan judo techniques and watch them as 3D point-light motion, 
 - **Viewer:** a canvas renderer with no dependencies. Tori and uke are shown as glowing joints. You can orbit, zoom, switch views, play at ¼× or ½× speed, turn on trails and bones, and jump through the phases kumikata, kuzushi, tsukuri, kake and ukemi.
 - **Motions:** one per technique, stored as a file. The viewer plays this app's keyframe JSON. BVH and C3D files (from mocap suits, pose-estimation tools or PLAViMoP) can already be uploaded, validated and served, and are ready for a viewer that plays them.
 
-Stack: PHP 8.2+, Symfony 7.4 LTS, Doctrine ORM 3, SQLite by default, Twig, PHPUnit 11.
+Stack: PHP 8.4, Symfony 7.4 LTS, Doctrine ORM 3 + Migrations, SQLite by default, Twig, PHPUnit 11. Runs in Docker on FrankenPHP.
 
-## Getting started
+## Getting started with Docker
+
+You need Docker with Compose v2. The image runs PHP 8.4. `composer.json` pins Composer's target platform to PHP 8.4.1 (`config.platform.php`), so a `composer install` on your own machine picks the same package versions as the container, whatever PHP you have locally. The first install creates `composer.lock`; commit it so every build installs the same versions. Doctrine uses PHP 8.4's native lazy objects (`enable_native_lazy_objects`), so the app needs PHP 8.4 or newer.
+
+```bash
+docker compose build
+docker compose up -d --wait
+```
+
+Open http://localhost:8080. On first start the container runs the migrations and loads the catalogue. The dev setup mounts your working copy, so code changes show up on refresh. The SQLite database stays in `var/data.db` and uploads go to `var/motions/`, as they would without Docker. Uploads work straight away with the token `dev-token`.
+
+| Command | What it does |
+|---|---|
+| `make up` / `make down` | Start or stop the dev stack |
+| `make logs` | Follow the logs |
+| `make sh` | Open a shell in the container |
+| `make test` | Run PHPUnit in the container |
+| `make console c="debug:router"` | Run any `bin/console` command |
+| `make seed` | Reload the catalogue and the bundled motions |
+
+Change the port with `HTTP_PORT=8000 make up`.
+
+### Production
+
+The `frankenphp_prod` image has the code, the production dependencies and a warmed cache built in. It runs as a non-root user with opcache locked. The database and uploaded motions live on a named volume (`storage`, mounted at `/srv/storage`), so they survive rebuilds and upgrades.
+
+```bash
+export APP_SECRET=$(openssl rand -hex 32)
+export MOTION_UPLOAD_TOKEN=$(openssl rand -hex 24)
+export SERVER_NAME=waza.example.com     # your domain; Caddy gets the HTTPS certificate itself
+make prod                               # = docker compose -f compose.yaml -f compose.prod.yaml up -d --build --wait
+```
+
+Leave `SERVER_NAME` unset to serve plain HTTP on port 80, for example behind your own reverse proxy or load balancer. The stack won't start without `APP_SECRET`.
+
+Each container start runs any new migrations and then the idempotent seed. Set `RUN_MIGRATIONS=0` or `SEED_CATALOGUE=0` to skip either, for example when you run several replicas and migrate in a separate step.
+
+`/healthz` returns `{"status":"ok"}` when the app can reach its database. Point uptime monitoring at it. The container's own healthcheck uses Caddy's admin endpoint, so it works with any `SERVER_NAME`.
+
+To use Postgres or MySQL instead of SQLite, set `DATABASE_URL` (the image includes both drivers) and generate a fresh migration for that platform. The bundled migration is written for SQLite.
+
+Back up the data volume:
+
+```bash
+docker run --rm -v waza-atlas_storage:/data -v "$PWD":/backup debian tar czf /backup/waza-storage.tgz -C /data .
+```
+
+## Getting started without Docker
+
+You need PHP 8.4+ with pdo_sqlite.
 
 ```bash
 composer install
-composer setup            # creates the schema and loads the catalogue + bundled motions
+composer setup            # runs the migrations and loads the catalogue + bundled motions
 php -S 127.0.0.1:8000 -t public    # or: symfony serve
 ```
 
-Open http://127.0.0.1:8000, or go straight to a technique at http://127.0.0.1:8000/waza/kibisu-gaeshi.
+Open http://127.0.0.1:8000, or go straight to a technique at http://127.0.0.1:8000/waza/kibisu-gaeshi. PHP's built-in upload limit is 2 MB. To test larger motion files without Docker, add `-d upload_max_filesize=21M -d post_max_size=24M`.
 
-To use MySQL or PostgreSQL instead of SQLite, set `DATABASE_URL` in `.env.local`, then run `composer setup`.
+To use MySQL or PostgreSQL instead of SQLite, set `DATABASE_URL` in `.env.local`, generate a migration for that platform with `bin/console doctrine:migrations:diff`, then run `composer setup`.
 
 Running `bin/console app:seed` again is safe: it updates the techniques in place and leaves existing motions alone. Add `--replace-motions` to reload the files in `data/motions/`.
+
+### Changing the schema
+
+After editing an entity:
+
+```bash
+bin/console doctrine:migrations:diff
+bin/console doctrine:migrations:migrate
+```
+
+A test fails if the entities and the migrations disagree, so a forgotten migration can't ship.
 
 ## Tests
 
@@ -29,7 +89,7 @@ Running `bin/console app:seed` again is safe: it updates the techniques in place
 composer test
 ```
 
-The 25 tests cover search, filters, the category tree, the JSON error format, seeding twice, the page itself, and motion upload, validation and deletion for BVH, C3D and keyframes.
+The 26 tests cover search, filters, the category tree, the JSON error format, seeding twice, the page itself, motion upload, validation and deletion for BVH, C3D and keyframes, and a check that the migrations match the entities.
 
 ## API
 
@@ -58,7 +118,7 @@ Uploads are off until you set a token in `.env.local`:
 MOTION_UPLOAD_TOKEN=pick-a-long-random-string
 ```
 
-Then send the file as multipart form data:
+In Docker, pass it as an environment variable instead, as shown under Production. Then send the file as multipart form data:
 
 ```bash
 curl -X POST http://127.0.0.1:8000/api/techniques/o-soto-gari/motion \
@@ -107,9 +167,13 @@ src/
   Controller/Api/                  JSON API
   Controller/AtlasController       the page, including /waza/{slug} deep links
   Command/SeedCommand              bin/console app:seed
+  Controller/HealthController      /healthz
+migrations/                        Doctrine migrations
+docker/frankenphp/                 Caddyfile, entrypoint, php.ini settings
+Dockerfile, compose*.yaml          dev and prod images, compose stacks
 public/assets/                     atlas.css, atlas.js (viewer, no build step)
 data/motions/                      bundled motions, loaded by app:seed
-var/motions/                       uploaded motions (git-ignored)
+var/motions/                       uploaded motions outside Docker (git-ignored)
 ```
 
 ## Next steps

@@ -1,0 +1,17 @@
+# Development: your working copy is mounted into the container, so edits show up on refresh.
+services:
+  app:
+    build:
+      context: .
+      target: frankenphp_dev
+    environment:
+      APP_ENV: dev
+      # Lets you try uploads straight away: -H 'Authorization: Bearer dev-token'
+      MOTION_UPLOAD_TOKEN: ${MOTION_UPLOAD_TOKEN:-dev-token}
+    volumes:
+      - ./:/app
+    ports:
+      - target: 80
+        published: ${HTTP_PORT:-8080}
+        protocol: tcp
+    tty: true

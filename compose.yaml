@@ -1,0 +1,18 @@
+# Shared definition. `docker compose up` also loads compose.override.yaml (development).
+# For production: docker compose -f compose.yaml -f compose.prod.yaml up -d --build
+name: waza-atlas
+
+services:
+  app:
+    image: ${IMAGES_PREFIX:-}waza-atlas
+    restart: unless-stopped
+    environment:
+      SERVER_NAME: ${SERVER_NAME:-:80}
+      MOTION_UPLOAD_TOKEN: ${MOTION_UPLOAD_TOKEN:-}
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:

@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TechniqueRepository::class)]
 #[ORM\UniqueConstraint(columns: ['slug'])]
-#[ORM\Index(columns: ['search_text'])]
 class Technique
 {
     #[ORM\Id]

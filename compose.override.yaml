@@ -10,8 +10,4 @@ services:
       MOTION_UPLOAD_TOKEN: ${MOTION_UPLOAD_TOKEN:-dev-token}
     volumes:
       - ./:/app
-    ports:
-      - target: 80
-        published: ${HTTP_PORT:-8080}
-        protocol: tcp
     tty: true

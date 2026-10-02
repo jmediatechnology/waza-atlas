@@ -16,3 +16,4 @@ tests/
 vendor/
 var/
 .env.dev
+tools/

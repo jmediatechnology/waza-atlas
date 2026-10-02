@@ -1,0 +1,12 @@
+{
+  "name": "waza-atlas-motion-lab",
+  "private": true,
+  "description": "Author, check and preview keyframe motions for Waza Atlas.",
+  "scripts": {
+    "gen": "node gen.js",
+    "check": "node check.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.55.0"
+  }
+}

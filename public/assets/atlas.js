@@ -40,6 +40,7 @@ function fk(p){
     Object.assign(J,{[k+'Hip']:hip,[k+'Knee']:knee,[k+'Ank']:ank,[k+'Sh']:sh,[k+'Elb']:elb,[k+'Wr']:wr});
   }
   J.fwd=mv(Rsp,[0,0,1]); J.up=mv(Rsp,[0,1,0]); J.side=mv(Rsp,[1,0,0]);
+  J.pfwd=mv(Rb,[0,0,1]); J.pup=mv(Rb,[0,1,0]); J.pside=mv(Rb,[1,0,0]);
   return J;
 }
 function plant(J,w){
@@ -56,18 +57,32 @@ function ik(S,T,hint){
   pole=nrm(pole);
   return {elb:add(S,add(sc(dir,x),sc(pole,h))), wr:add(S,sc(dir,Lc))};
 }
+/* Grip targets on the partner. A key "ik_<hand>_<target>" pulls that hand onto the partner's
+   opposite side (tori's left hand to uke's right sleeve); add "_s" for the same side ("ik_r_thigh_s"). */
+const GRIP_TARGETS=['sleeve','heel','lapel','collar','shoulder','belt','beltback','knee','thigh','wrist'];
 function gripTarget(name,opp,side){
-  if(name==='sleeve') return add(opp[side+'Elb'],sc(opp.up,-0.04));
-  if(name==='heel') return add(opp[side+'Ank'],sc(opp.fwd,-0.05));
-  const s=side==='l'?1:-1; // lapel
-  return add(add(add(opp.neck,sc(opp.side,s*0.08)),sc(opp.up,-0.14)),sc(opp.fwd,0.11));
+  const s=side==='l'?1:-1;
+  switch(name){
+    case 'sleeve': return add(opp[side+'Elb'],sc(opp.up,-0.04));
+    case 'heel': return add(opp[side+'Ank'],sc(opp.fwd,-0.05));
+    case 'shoulder': return add(add(opp[side+'Sh'],sc(opp.up,-0.07)),sc(opp.fwd,0.03)); // upper arm by the armpit
+    case 'wrist': return opp[side+'Wr']; // follow the partner's hand, e.g. a sleeve that tori is pulling
+    case 'collar': return add(add(opp.neck,sc(opp.fwd,-0.07)),sc(opp.up,0.02));
+    case 'belt': return add(add(opp.pelvis,sc(opp.pfwd,0.12)),sc(opp.pup,0.06));
+    case 'beltback': return add(add(opp.pelvis,sc(opp.pfwd,-0.12)),sc(opp.pup,0.06));
+    case 'knee': return add(opp[side+'Knee'],sc(opp.pfwd,-0.07));
+    case 'thigh': return add(lerp3(opp[side+'Hip'],opp[side+'Knee'],0.55),sc(opp.pside,-s*0.06));
+    default: return add(add(add(opp.neck,sc(opp.side,s*0.08)),sc(opp.up,-0.14)),sc(opp.fwd,0.11)); // lapel
+  }
 }
 function applyGrips(J,p,opp){
   for(const k of ['l','r']){
     const oside=k==='l'?'r':'l'; let ws=0, T=[0,0,0];
-    for(const nm of ['sleeve','heel','lapel']){
-      const w=c01(p['ik_'+k+'_'+nm]||0);
-      if(w>0){T=add(T,sc(gripTarget(nm,opp,oside),w)); ws+=w;}
+    for(const nm of GRIP_TARGETS){
+      for(const [key,sd] of [['ik_'+k+'_'+nm,oside],['ik_'+k+'_'+nm+'_s',k]]){
+        const w=c01(p[key]||0);
+        if(w>0){T=add(T,sc(gripTarget(nm,opp,sd),w)); ws+=w;}
+      }
     }
     if(ws<0.001) continue;
     T=sc(T,1/ws); const W=Math.min(1,ws), s=k==='l'?1:-1;
@@ -80,7 +95,13 @@ function applyGrips(J,p,opp){
 /* ---------- Keyframes ---------- */
 const BASE={x:0,y:1,z:0,yaw:0,pitch:3,roll:0,bend:5,twist:0,head:0,lHipF:5,lHipA:7,lKnee:12,rHipF:5,rHipA:7,rKnee:12,
   lShF:15,lShA:10,lElb:20,rShF:15,rShA:10,rElb:20,plant:1,ik_l_sleeve:0,ik_l_heel:0,ik_l_lapel:0,ik_r_sleeve:0,ik_r_heel:0,ik_r_lapel:0};
-function keyed(list){let cur={...BASE};return list.map(([t,d])=>{cur={...cur,...d};return {t,p:{...cur}}})}
+// Expand [time, changes] keys into full poses. A value first used part-way through (a new grip, say)
+// starts at 0 on the earlier keys, so it blends in instead of interpolating from nothing.
+function keyed(list){
+  const all={}; for(const [,d] of list) for(const k in d) all[k]=0;
+  let cur={...all,...BASE};
+  return list.map(([t,d])=>{cur={...cur,...d};return {t,p:{...cur}}});
+}
 function sample(keys,t){
   const n=keys.length; if(t<=keys[0].t) return keys[0].p; if(t>=keys[n-1].t) return keys[n-1].p;
   let i=0; while(t>keys[i+1].t) i++;
@@ -104,7 +125,8 @@ function frame(m,t){
   const pt=sample(m.tori,t), pu=sample(m.uke,t);
   const Jt=fk(pt); plant(Jt,c01(pt.plant));
   const Ju=fk(pu); plant(Ju,c01(pu.plant));
-  applyGrips(Jt,pt,Ju); applyGrips(Ju,pu,Jt);
+  // Tori, then uke, then tori again: uke's own grips move uke's elbows, and tori's sleeve grip must follow them.
+  applyGrips(Jt,pt,Ju); applyGrips(Ju,pu,Jt); applyGrips(Jt,pt,Ju);
   return [Jt,Ju];
 }
 

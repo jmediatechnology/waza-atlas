@@ -60,7 +60,7 @@ final class MotionApiTest extends DatabaseTestCase
         self::assertSame('Rokoko test', $t['motion']['source']);
         self::assertEqualsWithDelta(4.0, $t['motion']['duration'], 0.01);
         self::assertSame(['Kuzushi', 'Kake'], array_column($t['motion']['phases'], 'name'));
-        self::assertSame(2, $this->getJson('/api/techniques?motion=1')['count']);
+        self::assertSame(17, $this->getJson('/api/techniques?motion=1')['count']);
 
         $this->client->request('GET', '/api/techniques/o-soto-gari/motion');
         self::assertResponseIsSuccessful();

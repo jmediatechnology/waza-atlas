@@ -1,0 +1,155 @@
+// Batch 3: uke falls backward. See shoulder-throws.js for the frame conventions.
+// Backward fall: uke's pitch goes from 0 to -90, which lays uke on the back with the head away from tori.
+const T0 = {z:-0.33, pitch:5, bend:8, lKnee:16, rKnee:16, lHipF:9, rHipF:9, lShF:50, lElb:60, rShF:55, rElb:70, ik_l_sleeve:1, ik_r_lapel:1};
+const U0 = {z:0.33, yaw:180, pitch:4, bend:7, lKnee:16, rKnee:16, lHipF:9, rHipF:9, lShF:55, lElb:70, rShF:50, rElb:60, ik_r_lapel:1, ik_l_sleeve:1};
+const LAND_BACK = {pitch:-90, bend:12, plant:1, lHipF:45, rHipF:40, lKnee:45, rKnee:35, lShF:25, lShA:50, lElb:5, rShF:25, rShA:50, rElb:5, head:40, ik_r_lapel:0, ik_l_sleeve:0};
+const PH = (k, kz, ts, tk, kk, uk) => [
+  {t:0, name:'Kumikata', en:'Gripping', text:k},
+  {t:kz[0], name:'Kuzushi', en:'Breaking balance', text:kz[1]},
+  {t:ts[0], name:'Tsukuri', en:'Entry', text:ts[1]},
+  {t:tk[0], name:'Kake', en:'Execution', text:tk[1]},
+  {t:kk[0], name:'Ukemi', en:'Breakfall', text:uk},
+];
+const GRIP = 'Right-handed grip: tori holds uke’s left lapel with the right hand and uke’s right sleeve with the left.';
+
+const sumiOtoshi = {
+  slug:'sumi-otoshi', duration:5,
+  phases: PH(GRIP,
+    [1.0, 'Tori pushes uke back toward uke’s right back corner. Uke steps back with the right foot to stay upright, and the weight settles on that heel.'],
+    [1.5, 'Tori steps the left foot forward, just outside uke’s right foot, and follows uke into the corner. There is no hip or leg contact.'],
+    [2.0, 'Tori lifts uke’s right arm and then drives it down and back with the left hand, while the right hand pushes on the chest. Uke drops into the corner where there is no foot to catch them.'],
+    [2.7, null],
+    'Uke falls backward and lands on the back, turned toward the right side, while tori keeps hold of the sleeve.'),
+  tori: [
+    [0, T0],
+    [0.9, {bend:9}],
+    [1.4, {z:-0.25, x:0.03, yaw:12, lHipF:30, lKnee:30, rHipF:-5, pitch:8}],
+    [1.9, {z:-0.12, x:0.08, yaw:28, pitch:14, bend:12, lHipF:55, lKnee:55, lHipA:10, rHipF:-5, rKnee:12, head:6}],
+    [2.25, {z:-0.04, x:0.13, pitch:22, bend:22, lHipF:62, lKnee:62, rHipF:2, head:12}],
+    [2.6, {z:0.12, x:0.20, pitch:28, bend:34, lHipF:70, lKnee:68, rHipF:8, ik_r_lapel:0, rShF:50, rShA:15, rElb:45, head:16}],
+    [3.3, {z:0.18, x:0.22, pitch:28, bend:50, lHipF:72, lKnee:66}],
+    [3.9, {ik_l_sleeve:0, lShF:45, lElb:50}],
+    [4.6, {z:-0.02, pitch:8, bend:14, lHipF:20, lKnee:22, rHipF:12, rKnee:15, head:5}],
+    [5.0, {}],
+  ],
+  uke: [
+    [0, U0],
+    [0.9, {}],
+    [1.4, {z:0.38, x:0.04, pitch:-6, rHipF:-14, rKnee:10, lHipF:12, head:2}],
+    [1.9, {z:0.44, x:0.12, yaw:190, pitch:-18, bend:-4, rHipF:-6, lHipF:22, lKnee:22, head:8}],
+    [2.25, {plant:0, y:0.80, z:0.58, x:0.22, yaw:200, pitch:-42, bend:6, lHipF:40, rHipF:20, lKnee:30, rKnee:25, ik_r_lapel:0, ik_l_sleeve:0, lShF:70, lShA:40, rShF:95, rShA:15, rElb:10, head:20}],
+    [2.6, {y:0.40, z:0.78, x:0.30, pitch:-70, roll:12}],
+    [2.85, {...LAND_BACK, y:0.15, z:0.95, x:0.34, yaw:205, roll:18, rShF:100, rShA:10, rElb:8}],
+    [3.6, {}],
+    [4.0, {rShF:25, rShA:50, rElb:5, rHipF:30, lHipF:30, head:30}],
+    [5.0, {}],
+  ],
+};
+
+const kuchikiTaoshi = {
+  slug:'kuchiki-taoshi', duration:5,
+  phases: PH(GRIP,
+    [1.0, 'Tori pushes uke back so the weight sits on the heels, then lets go of the sleeve.'],
+    [1.5, 'Tori lowers and reaches with the left hand behind uke’s right knee, keeping the right hand on uke’s lapel.'],
+    [2.0, 'Tori lifts and pulls uke’s right leg forward while the right hand drives uke’s chest back and down. Uke topples backward like a falling tree.'],
+    [2.7, null],
+    'Uke lands on the back with the caught leg still held up.'),
+  tori: [
+    [0, T0],
+    [0.9, {bend:9}],
+    [1.3, {z:-0.28, pitch:10, ik_l_sleeve:0, lShF:40, lShA:10, lElb:30}],
+    [1.7, {z:-0.20, x:0.14, pitch:18, bend:22, lHipF:60, rHipF:50, lKnee:65, rKnee:55, ik_l_knee:1, head:8}],
+    [2.05, {z:-0.12, x:0.12, pitch:18, bend:20, lHipF:45, rHipF:50, lKnee:35, rKnee:45, head:10}],
+    [2.4, {z:-0.02, pitch:26, bend:30, rHipF:60, rKnee:50, lHipF:40, lKnee:30}],
+    [2.8, {z:0.06, pitch:32, bend:38, ik_r_lapel:0, rShF:60, rShA:15, rElb:40}],
+    [3.3, {pitch:30, bend:42}],
+    [3.8, {ik_l_knee:0, lShF:45, lElb:40}],
+    [4.6, {z:0.02, pitch:8, bend:14, lHipF:14, rHipF:16, lKnee:18, rKnee:20, head:4}],
+    [5.0, {}],
+  ],
+  uke: [
+    [0, U0],
+    [0.9, {}],
+    [1.3, {z:0.36, pitch:-4, head:2}],
+    [1.7, {pitch:-6, rHipF:18, rKnee:35, lKnee:18, ik_r_lapel:1}],
+    [2.05, {z:0.38, pitch:-14, rHipF:55, rKnee:60, lKnee:22, lHipF:0, ik_l_sleeve:0, lShF:60, lShA:35, lElb:30}],
+    [2.4, {plant:0, y:0.75, z:0.55, pitch:-42, bend:6, rHipF:75, rKnee:55, lHipF:20, lKnee:30, ik_r_lapel:0, rShF:80, rShA:30, rElb:20, head:20}],
+    [2.65, {y:0.40, z:0.74, pitch:-70, rHipF:85, rKnee:45}],
+    [2.9, {...LAND_BACK, y:0.15, z:0.92, rHipF:80, rKnee:40, lHipF:40, lKnee:45}],
+    [3.8, {}],
+    [4.3, {rHipF:40, rKnee:35, head:30}],
+    [5.0, {}],
+  ],
+};
+
+const moroteGari = {
+  slug:'morote-gari', duration:5,
+  phases: PH(GRIP,
+    [1.0, 'Tori lets go of both grips and drops the hips, coming in under uke’s arms before uke can react.'],
+    [1.5, 'Tori steps deep between uke’s feet with the right foot and wraps both hands behind uke’s knees. The right shoulder goes into uke’s stomach, with tori’s head to the outside.'],
+    [2.0, 'Tori pulls both legs in and drives forward with the shoulder. Uke’s feet come off the mat and uke goes over backward.'],
+    [2.7, null],
+    'Uke falls straight back. Tori follows on one knee and lets go of the legs.'),
+  tori: [
+    [0, T0],
+    [0.9, {bend:9}],
+    [1.2, {z:-0.30, ik_l_sleeve:0, ik_r_lapel:0, lShF:70, lShA:10, lElb:30, rShF:70, rShA:10, rElb:30, pitch:12, bend:12, lKnee:35, rKnee:35, lHipF:30, rHipF:30}],
+    [1.6, {z:-0.12, x:0.16, pitch:40, bend:30, lHipF:75, lKnee:85, rHipF:60, rKnee:70, head:-10, ik_l_knee:1, ik_r_knee:1}],
+    [2.0, {z:0.0, x:0.16, pitch:46, bend:30, lHipF:60, lKnee:70, rHipF:75, rKnee:95, head:-12}],
+    [2.4, {z:0.14, pitch:44, bend:28, lHipF:44, lKnee:95, rHipF:95, rKnee:85}],
+    [2.8, {z:0.28, pitch:30, bend:30, lHipF:30, lKnee:92, rHipF:115, rKnee:95, head:0}],
+    [3.4, {ik_l_knee:0, ik_r_knee:0, lShF:55, lElb:40, rShF:55, rElb:40, pitch:20, bend:24, lHipF:20, rHipF:105}],
+    [4.3, {pitch:10, bend:14, lHipF:10, rHipF:95, head:4}],
+    [5.0, {}],
+  ],
+  uke: [
+    [0, U0],
+    [0.9, {}],
+    [1.3, {ik_r_lapel:0, ik_l_sleeve:0, lShF:40, lShA:20, lElb:50, rShF:40, rShA:20, rElb:50}],
+    [1.7, {pitch:10, bend:14, lHipA:12, rHipA:12, head:6, lShF:30, rShF:30}],
+    [2.05, {plant:0, y:0.92, z:0.40, pitch:-12, bend:20, lHipF:25, rHipF:25, lKnee:30, rKnee:30, lShF:60, rShF:60, lShA:30, rShA:30, head:15}],
+    [2.4, {y:0.62, z:0.70, pitch:-50, bend:18, lHipF:50, rHipF:50, lKnee:45, rKnee:45}],
+    [2.75, {...LAND_BACK, y:0.15, z:0.98, lHipF:70, rHipF:70, lKnee:55, rKnee:55}],
+    [3.6, {}],
+    [4.2, {lHipF:45, rHipF:40, lKnee:45, rKnee:35, head:30}],
+    [5.0, {}],
+  ],
+};
+
+const koUchiGaeshi = {
+  slug:'ko-uchi-gaeshi', duration:5,
+  phases: PH(GRIP+' Here uke attacks first.',
+    [1.0, 'Uke steps in and tries a right ko-uchi-gari, hooking at tori’s right heel from the inside.'],
+    [1.5, 'Tori lifts the right foot just clear of the reap and lets uke’s leg sweep through, so uke is left standing on one leg.'],
+    [2.0, 'Tori turns to the left and pulls uke’s sleeve down and round while the right hand pushes. Uke is spun off the supporting leg.'],
+    [2.7, null],
+    'Uke falls backward onto the right side to tori’s left and breaks the fall with the left arm.'),
+  tori: [
+    [0, T0],
+    [0.9, {bend:9}],
+    [1.4, {}],
+    [1.7, {rHipF:35, rKnee:55, lKnee:22, pitch:4}],
+    [2.0, {yaw:35, twist:20, rHipF:25, rKnee:40, pitch:8, bend:14, lShF:40, lShA:-20, lElb:30}],
+    [2.55, {yaw:60, twist:30, rHipF:10, rKnee:20, pitch:14, bend:24, ik_l_sleeve:0, lShF:55, lShA:-30, lElb:20}],
+    [2.9, {yaw:65, twist:10, pitch:20, bend:30, x:0.06, rHipF:20, rKnee:25, lHipF:25, lKnee:25, ik_r_lapel:0, rShF:50, rShA:15, rElb:40, lShF:60, lShA:-35, lElb:10}],
+    [3.6, {twist:5}],
+    [4.0, {lShF:45, lShA:0, lElb:50}],
+    [4.6, {pitch:8, bend:14, lHipF:12, rHipF:12, lKnee:18, rKnee:18, head:4}],
+    [5.0, {}],
+  ],
+  uke: [
+    [0, U0],
+    [0.9, {}],
+    [1.4, {z:0.24, pitch:8, rHipF:25, rKnee:20, rHipA:-10}],
+    [1.7, {z:0.20, x:-0.03, rHipF:35, rKnee:8, rHipA:-28, pitch:4, bend:6, lKnee:25}],
+    [2.0, {yaw:200, rHipF:40, rKnee:5, rHipA:-22, ik_l_sleeve:0, ik_r_lapel:0, rShF:80, rShA:15, rElb:15, lShF:70, lShA:40, lElb:30}],
+    [2.35, {plant:0, y:0.80, z:0.22, x:0.18, yaw:225, pitch:-30, roll:-25, bend:8, rHipF:50, rHipA:-10, lHipF:20, lKnee:35, head:18}],
+    [2.65, {y:0.42, z:0.22, x:0.52, yaw:240, pitch:-62, roll:-30}],
+    [2.9, {...LAND_BACK, y:0.15, z:0.22, x:0.72, yaw:245, roll:-30, rShF:95, rShA:10, rElb:10, lShF:30, lShA:70}],
+    [4.0, {rShF:25, rShA:50, rElb:5}],
+    [4.4, {rHipF:30, lHipF:30, head:28}],
+    [5.0, {}],
+  ],
+};
+
+module.exports = {sumiOtoshi, kuchikiTaoshi, moroteGari, koUchiGaeshi};

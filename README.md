@@ -5,7 +5,7 @@ Search all 100 Kodokan judo techniques and watch them as 3D point-light motion, 
 - **Catalogue:** 68 nage-waza and 32 katame-waza in 8 categories, with kanji, English names, Gokyo groups and the techniques prohibited in shiai.
 - **Search:** works on romaji, English, kanji and category names, ignoring case, spaces and hyphens. "te waza", "Te-waza" and "hand techniques" all return the 16 te-waza, and "踵" finds Kibisu-gaeshi.
 - **Viewer:** a canvas renderer with no dependencies. Tori and uke are shown as glowing joints. You can orbit, zoom, switch views, play at ¼× or ½× speed, turn on trails and bones, and jump through the phases kumikata, kuzushi, tsukuri, kake and ukemi.
-- **Motions:** one per technique, stored as a file. The viewer plays this app's keyframe JSON. BVH and C3D files (from mocap suits, pose-estimation tools or PLAViMoP) can already be uploaded, validated and served, and are ready for a viewer that plays them.
+- **Motions:** all 16 te-waza come with a hand-keyed motion, a five-phase timeline (kumikata, kuzushi, tsukuri, kake, ukemi) and a written breakdown of each phase. A technique has one motion, stored as a file. The viewer plays this app's keyframe JSON. BVH and C3D files (from mocap suits, pose-estimation tools or PLAViMoP) can already be uploaded, validated and served, and are ready for a viewer that plays them.
 
 Stack: PHP 8.4, Symfony 7.4 LTS, Doctrine ORM 3 + Migrations, SQLite by default, Twig, PHPUnit 11. Runs in Docker on FrankenPHP.
 
@@ -89,7 +89,7 @@ A test fails if the entities and the migrations disagree, so a forgotten migrati
 composer test
 ```
 
-The 26 tests cover search, filters, the category tree, the JSON error format, seeding twice, the page itself, motion upload, validation and deletion for BVH, C3D and keyframes, and a check that the migrations match the entities.
+The 42 tests cover search, filters, the category tree, the JSON error format, seeding twice, the page itself, motion upload, validation and deletion for BVH, C3D and keyframes, a check that every bundled motion is valid and fully described, and a check that the migrations match the entities.
 
 ## API
 
@@ -141,7 +141,7 @@ The file type comes from the extension: `.json`, `.bvh` or `.c3d`, up to 20 MB. 
   "source": "Hand-keyed placeholder",
   "phases": [{"t": 0, "name": "Kumikata", "en": "Gripping", "text": "…"}],
   "tracks": {
-    "tori": [[0, {"z": -0.45, "bend": 8, "ik_r_lapel": 1}], [1.95, {"bend": 52}]],
+    "tori": [[0, {"z": -0.33, "bend": 8, "ik_r_lapel": 1}], [1.95, {"bend": 52}]],
     "uke":  [[0, {"z": 0.45, "yaw": 180}], [2.95, {"pitch": -58}]]
   }
 }
@@ -152,7 +152,7 @@ Each key is `[seconds, pose changes]`. A pose change only lists the values that 
 - **Body:** `x`, `y`, `z` (metres), and `yaw`, `pitch`, `roll`, `bend`, `twist` and `head` in degrees.
 - **Legs:** hip flexion and abduction per side (`lHipF`, `lHipA`, `rHipF`, `rHipA`) and knee bend (`lKnee`, `rKnee`).
 - **Arms:** shoulder flexion and abduction (`lShF`, `lShA`, `rShF`, `rShA`) and elbow bend (`lElb`, `rElb`).
-- **Grips:** `ik_<l|r>_<sleeve|heel|lapel>`, a weight from 0 to 1 that pulls that hand onto the partner's sleeve, heel or lapel with two-bone IK.
+- **Grips:** `ik_<l|r>_<target>`, a weight from 0 to 1 that pulls that hand onto the partner with two-bone IK. Targets: `sleeve`, `lapel`, `collar` (back of the collar), `shoulder` (upper arm by the armpit), `belt`, `beltback`, `knee` (back of the knee), `thigh` (inside of the thigh), `heel` and `wrist` (the partner's hand, for an arm being pulled along). A grip goes to the partner's opposite side by default, so tori's left hand takes uke's right sleeve. Add `_s` for the same side: `ik_r_thigh_s` is tori's right hand on uke's right thigh.
 - **`plant`:** sets how strongly the figure is kept on the mat.
 
 ## Project layout
@@ -176,8 +176,28 @@ data/motions/                      bundled motions, loaded by app:seed
 var/motions/                       uploaded motions outside Docker (git-ignored)
 ```
 
+## Animating more techniques
+
+The 15 newer te-waza motions were written in `tools/motion-lab/src/` and checked with the lab in `tools/motion-lab`:
+
+```bash
+cd tools/motion-lab
+npm install && npx playwright install chromium
+node gen.js seoi-nage          # writes data/motions/seoi-nage.json, prints a report, renders sheets/seoi-nage.png
+```
+
+- **Report:** shows how close the two bodies get, whether uke ends on the mat, and any grip whose hand can't reach its target.
+- **Sheet:** shows the motion from the side, front, three-quarter and top at 11 moments, so you can see a bad step or a head collision without opening the site.
+
+The lab uses the viewer's own skeleton code, so what you check is what the site plays. Run `bin/console app:seed --replace-motions` afterwards to load changed files. The conventions are at the top of `src/shoulder-throws.js`:
+
+- **Starting positions:** tori starts at z −0.33 facing +z and uke at +0.33 facing −z.
+- **Pitch:** a positive pitch leans forward. A forward somersault ends on the back at pitch 270.
+- **Legs follow the pitch:** to keep a leg vertical while leaning, add the pitch to its hip flexion.
+
 ## Next steps
 
 1. **Play BVH in the viewer.** Parse the hierarchy in `atlas.js`, map its joints onto the 15 points the viewer already draws, and use the frame time for playback.
-2. **Record real throws.** Film a few common Gokyo throws from two angles and turn the video into BVH with a markerless pose tool, then upload the files through the API.
-3. **Add an admin screen** for uploads, so recording a motion doesn't need curl.
+2. **Record real throws.** The hand-keyed motions show the idea of each throw, not a real judoka's timing. Film the Gokyo throws from two angles, turn the video into BVH with a markerless pose tool, and upload the files through the API.
+3. **Animate the other 84 techniques** with the motion lab, starting with the rest of the Gokyo.
+4. **Add an admin screen** for uploads, so recording a motion doesn't need curl.

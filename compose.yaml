@@ -6,6 +6,8 @@ services:
   app:
     image: ${IMAGES_PREFIX:-}waza-atlas
     restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8080}:80"
     environment:
       SERVER_NAME: ${SERVER_NAME:-:80}
       MOTION_UPLOAD_TOKEN: ${MOTION_UPLOAD_TOKEN:-}

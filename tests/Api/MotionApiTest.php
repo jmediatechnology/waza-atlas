@@ -36,6 +36,7 @@ final class MotionApiTest extends DatabaseTestCase
 
     public function testTechniqueWithoutMotionGives404(): void
     {
+        $this->client->request('DELETE', '/api/techniques/o-soto-gari/motion', [], [], ['HTTP_AUTHORIZATION' => 'Bearer test-token']);
         $this->getJson('/api/techniques/o-soto-gari/motion', 404);
     }
 
@@ -60,7 +61,7 @@ final class MotionApiTest extends DatabaseTestCase
         self::assertSame('Rokoko test', $t['motion']['source']);
         self::assertEqualsWithDelta(4.0, $t['motion']['duration'], 0.01);
         self::assertSame(['Kuzushi', 'Kake'], array_column($t['motion']['phases'], 'name'));
-        self::assertSame(17, $this->getJson('/api/techniques?motion=1')['count']);
+        self::assertSame(100, $this->getJson('/api/techniques?motion=1')['count'], 'An upload replaces the bundled motion.');
 
         $this->client->request('GET', '/api/techniques/o-soto-gari/motion');
         self::assertResponseIsSuccessful();

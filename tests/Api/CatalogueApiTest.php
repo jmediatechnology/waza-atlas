@@ -41,11 +41,11 @@ final class CatalogueApiTest extends DatabaseTestCase
         self::assertSame(12, $this->getJson('/api/techniques?family=katame&category=shime')['count']);
         self::assertSame(0, $this->getJson('/api/techniques?family=nage&category=shime')['count']);
 
-        // Every te-waza has a bundled motion; nothing else does yet.
+        // Every technique has a bundled motion.
         $withMotion = $this->getJson('/api/techniques?motion=1');
-        self::assertSame(16, $withMotion['count']);
-        self::assertSame(['te'], array_values(array_unique(array_column($withMotion['techniques'], 'category'))));
-        self::assertSame(0, $this->getJson('/api/techniques?motion=1&category=ashi')['count']);
+        self::assertSame(100, $withMotion['count']);
+        self::assertCount(8, array_unique(array_column($withMotion['techniques'], 'category')));
+        self::assertSame(21, $this->getJson('/api/techniques?motion=1&category=ashi')['count']);
     }
 
     public function testUnknownFamilyIsABadRequest(): void
@@ -69,7 +69,7 @@ final class CatalogueApiTest extends DatabaseTestCase
     public function testGokyoAndProhibitedFlags(): void
     {
         self::assertSame(1, $this->getJson('/api/techniques/o-soto-gari')['gokyo']);
-        self::assertNull($this->getJson('/api/techniques/o-soto-gari')['motion']);
+        self::assertSame('keyframes', $this->getJson('/api/techniques/o-soto-gari')['motion']['format']);
         self::assertTrue($this->getJson('/api/techniques/kani-basami')['prohibited']);
         self::assertStringContainsString('leg grab', (string) $this->getJson('/api/techniques/morote-gari')['notes']);
     }

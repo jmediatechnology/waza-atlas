@@ -1,0 +1,265 @@
+{
+ "format": "keyframes",
+ "version": 1,
+ "source": "Hand-keyed animation",
+ "duration": 5,
+ "phases": [
+  {
+   "t": 0,
+   "name": "Kumikata",
+   "en": "Gripping",
+   "text": "Right-handed grip: tori holds uke’s left lapel with the right hand and uke’s right sleeve with the left."
+  },
+  {
+   "t": 1,
+   "name": "Kuzushi",
+   "en": "Breaking balance",
+   "text": "Tori pushes uke back toward the right back corner. Uke stiffens or leans back to resist."
+  },
+  {
+   "t": 1.5,
+   "name": "Tsukuri",
+   "en": "Entry",
+   "text": "Tori steps behind uke’s right side and slides the left leg along the mat behind both of uke’s heels."
+  },
+  {
+   "t": 1.95,
+   "name": "Kake",
+   "en": "Execution",
+   "text": "Tori drops onto the left side, pulling uke straight down and back into the gap behind the heels, the “valley”."
+  },
+  {
+   "t": 2.8,
+   "name": "Ukemi",
+   "en": "Breakfall",
+   "text": "Uke falls backward beside tori."
+  }
+ ],
+ "tracks": {
+  "tori": [
+   [
+    0,
+    {
+     "z": -0.33,
+     "pitch": 5,
+     "bend": 8,
+     "lKnee": 16,
+     "rKnee": 16,
+     "lHipF": 9,
+     "rHipF": 9,
+     "lShF": 50,
+     "lElb": 60,
+     "rShF": 55,
+     "rElb": 70,
+     "ik_l_sleeve": 1,
+     "ik_r_lapel": 1
+    }
+   ],
+   [
+    0.9,
+    {
+     "bend": 9
+    }
+   ],
+   [
+    1.3,
+    {
+     "x": 0.14,
+     "z": -0.12,
+     "yaw": 20,
+     "lHipF": 25,
+     "lKnee": 20,
+     "pitch": 6
+    }
+   ],
+   [
+    1.65,
+    {
+     "lHipA": 30,
+     "lHipF": -20,
+     "lKnee": 4,
+     "rKnee": 45,
+     "rHipF": 30,
+     "pitch": 10,
+     "x": 0.3,
+     "z": 0.08,
+     "yaw": 30
+    }
+   ],
+   [
+    2,
+    {
+     "yaw": 20,
+     "pitch": -30,
+     "roll": -25,
+     "bend": 15,
+     "lHipF": 40,
+     "lHipA": 30,
+     "rKnee": 80,
+     "rHipF": 70,
+     "x": 0.34,
+     "z": 0.14
+    }
+   ],
+   [
+    2.4,
+    {
+     "yaw": 30,
+     "pitch": -85,
+     "roll": -30,
+     "bend": 20,
+     "lHipF": 55,
+     "lHipA": 15,
+     "lKnee": 5,
+     "rHipF": 75,
+     "rKnee": 60,
+     "ik_r_lapel": 0,
+     "rShF": 60,
+     "rElb": 40,
+     "x": 0.38,
+     "z": 0.18
+    }
+   ],
+   [
+    3.3,
+    {
+     "ik_l_sleeve": 0,
+     "lShF": 40,
+     "lElb": 40
+    }
+   ],
+   [
+    4.4,
+    {
+     "pitch": -55,
+     "roll": -10,
+     "bend": 40,
+     "lHipF": 90,
+     "rHipF": 90,
+     "lKnee": 95,
+     "rKnee": 95
+    }
+   ],
+   [
+    5,
+    {}
+   ]
+  ],
+  "uke": [
+   [
+    0,
+    {
+     "z": 0.33,
+     "yaw": 180,
+     "pitch": 4,
+     "bend": 7,
+     "lKnee": 16,
+     "rKnee": 16,
+     "lHipF": 9,
+     "rHipF": 9,
+     "lShF": 55,
+     "lElb": 70,
+     "rShF": 50,
+     "rElb": 60,
+     "ik_r_lapel": 1,
+     "ik_l_sleeve": 1
+    }
+   ],
+   [
+    0.9,
+    {}
+   ],
+   [
+    1.3,
+    {
+     "z": 0.36,
+     "pitch": -6
+    }
+   ],
+   [
+    1.65,
+    {
+     "z": 0.36,
+     "pitch": -12,
+     "bend": 2,
+     "head": 4
+    }
+   ],
+   [
+    2.05,
+    {
+     "plant": 0,
+     "y": 0.72,
+     "z": 0.655,
+     "x": 0.06,
+     "yaw": 200,
+     "pitch": -48,
+     "bend": 8,
+     "ik_r_lapel": 0,
+     "ik_l_sleeve": 0,
+     "lShF": 70,
+     "lShA": 40,
+     "lElb": 20,
+     "rShF": 70,
+     "rShA": 40,
+     "rElb": 20,
+     "head": 20,
+     "lHipF": 35,
+     "rHipF": 35,
+     "lKnee": 30,
+     "rKnee": 30
+    }
+   ],
+   [
+    2.3499999999999996,
+    {
+     "y": 0.4,
+     "z": 0.874,
+     "x": 0.09000000000000001,
+     "pitch": -75
+    }
+   ],
+   [
+    2.65,
+    {
+     "pitch": -90,
+     "bend": 12,
+     "plant": 1,
+     "lHipF": 45,
+     "rHipF": 40,
+     "lKnee": 45,
+     "rKnee": 35,
+     "lShF": 25,
+     "lShA": 50,
+     "lElb": 5,
+     "rShF": 25,
+     "rShA": 50,
+     "rElb": 5,
+     "head": 40,
+     "ik_r_lapel": 0,
+     "ik_l_sleeve": 0,
+     "y": 0.15,
+     "z": 0.95,
+     "x": 0.1,
+     "yaw": 200
+    }
+   ],
+   [
+    3.55,
+    {}
+   ],
+   [
+    4.05,
+    {
+     "rHipF": 30,
+     "lHipF": 30,
+     "head": 30
+    }
+   ],
+   [
+    5,
+    {}
+   ]
+  ]
+ }
+}

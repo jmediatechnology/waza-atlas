@@ -48,21 +48,46 @@ final class MotionInspectorTest extends TestCase
         $info = (new MotionInspector())->inspect(MotionFormat::Keyframes, (string) file_get_contents($file));
 
         self::assertGreaterThanOrEqual(4.0, $info['duration']);
-        self::assertSame(['Kumikata', 'Kuzushi', 'Tsukuri', 'Kake', 'Ukemi'], array_column($info['phases'], 'name'));
+        self::assertSame(self::expectedPhases(basename($file, '.json')), array_column($info['phases'], 'name'));
         foreach ($info['phases'] as $phase) {
             self::assertNotSame('', $phase['text'], basename($file).': every phase needs a description');
         }
     }
 
-    public function testEveryTeWazaHasAMotion(): void
+    public function testEveryTechniqueHasAMotion(): void
     {
         $slugs = array_map(static fn (string $f) => basename($f, '.json'), glob(__DIR__.'/../../data/motions/*.json') ?: []);
-        $teWaza = [];
-        foreach (KodokanCatalogue::categories()[0]['techniques'] as $t) {
-            $teWaza[] = strtolower($t['name']);
+
+        self::assertCount(100, $slugs);
+        self::assertEqualsCanonicalizing(array_keys(self::categoryOf()), $slugs);
+    }
+
+    /**
+     * Throws follow the five classic phases; ground techniques have four, ending in an escape attempt (pins)
+     * or the submission (strangles and locks).
+     *
+     * @return list<string>
+     */
+    private static function expectedPhases(string $slug): array
+    {
+        return match (self::categoryOf()[$slug] ?? null) {
+            'osaekomi' => ['Tsukuri', 'Kime', 'Osaekomi', 'Nogare'],
+            'shime' => ['Tsukuri', 'Kime', 'Shime', 'Maitta'],
+            'kansetsu' => ['Tsukuri', 'Kime', 'Kansetsu', 'Maitta'],
+            default => ['Kumikata', 'Kuzushi', 'Tsukuri', 'Kake', 'Ukemi'],
+        };
+    }
+
+    /** @return array<string, string> technique slug => category slug */
+    private static function categoryOf(): array
+    {
+        $map = [];
+        foreach (KodokanCatalogue::categories() as $category) {
+            foreach ($category['techniques'] as $t) {
+                $map[strtolower($t['name'])] = $category['slug'];
+            }
         }
 
-        self::assertSame('te', KodokanCatalogue::categories()[0]['slug']);
-        self::assertEqualsCanonicalizing($teWaza, $slugs);
+        return $map;
     }
 }

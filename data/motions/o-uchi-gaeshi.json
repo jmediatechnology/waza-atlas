@@ -1,0 +1,281 @@
+{
+ "format": "keyframes",
+ "version": 1,
+ "source": "Hand-keyed animation",
+ "duration": 5,
+ "phases": [
+  {
+   "t": 0,
+   "name": "Kumikata",
+   "en": "Gripping",
+   "text": "Right-handed grip: tori holds uke’s left lapel with the right hand and uke’s right sleeve with the left. Here uke attacks first."
+  },
+  {
+   "t": 1,
+   "name": "Kuzushi",
+   "en": "Breaking balance",
+   "text": "Uke steps in for a right o-uchi-gari, hooking tori’s left leg from the inside."
+  },
+  {
+   "t": 1.5,
+   "name": "Tsukuri",
+   "en": "Entry",
+   "text": "Tori lets the leg go with the reap, lifting it so uke’s leg is carried along on tori’s calf."
+  },
+  {
+   "t": 1.95,
+   "name": "Kake",
+   "en": "Execution",
+   "text": "Tori turns to the left and pulls uke’s right sleeve down and round. With the reaping leg trapped in the air, uke is spun over."
+  },
+  {
+   "t": 2.65,
+   "name": "Ukemi",
+   "en": "Breakfall",
+   "text": "Uke falls onto the back to tori’s left."
+  }
+ ],
+ "tracks": {
+  "tori": [
+   [
+    0,
+    {
+     "z": -0.33,
+     "pitch": 5,
+     "bend": 8,
+     "lKnee": 16,
+     "rKnee": 16,
+     "lHipF": 9,
+     "rHipF": 9,
+     "lShF": 50,
+     "lElb": 60,
+     "rShF": 55,
+     "rElb": 70,
+     "ik_l_sleeve": 1,
+     "ik_r_lapel": 1
+    }
+   ],
+   [
+    0.9,
+    {
+     "bend": 9
+    }
+   ],
+   [
+    1.3,
+    {}
+   ],
+   [
+    1.6,
+    {
+     "lHipF": 35,
+     "lHipA": 20,
+     "lKnee": 40,
+     "pitch": 2
+    }
+   ],
+   [
+    1.95,
+    {
+     "yaw": 30,
+     "twist": 25,
+     "lHipF": 40,
+     "lHipA": 30,
+     "pitch": 8,
+     "bend": 12,
+     "ik_l_sleeve": 0,
+     "lShF": 70,
+     "lShA": -40,
+     "lElb": 30
+    }
+   ],
+   [
+    2.35,
+    {
+     "yaw": 45,
+     "twist": 35,
+     "lHipF": 15,
+     "lHipA": 10,
+     "lKnee": 15,
+     "pitch": 16,
+     "bend": 24,
+     "lShF": 35,
+     "lShA": -20,
+     "lElb": 20
+    }
+   ],
+   [
+    3.1,
+    {
+     "pitch": 22,
+     "bend": 34,
+     "roll": 0,
+     "twist": 20,
+     "ik_r_lapel": 0,
+     "rShF": 50,
+     "rShA": 15,
+     "rElb": 40,
+     "yaw": 45,
+     "lHipF": 30,
+     "lKnee": 25,
+     "rHipF": 25,
+     "rKnee": 25
+    }
+   ],
+   [
+    3.8,
+    {
+     "ik_l_sleeve": 0,
+     "lShF": 45,
+     "lShA": 0,
+     "lElb": 50
+    }
+   ],
+   [
+    4.5,
+    {
+     "pitch": 8,
+     "bend": 14,
+     "twist": 0,
+     "roll": 0,
+     "lHipF": 12,
+     "rHipF": 12,
+     "lKnee": 16,
+     "rKnee": 16,
+     "lHipA": 7,
+     "rHipA": 7,
+     "head": 4,
+     "yaw": 0
+    }
+   ],
+   [
+    5,
+    {}
+   ]
+  ],
+  "uke": [
+   [
+    0,
+    {
+     "z": 0.33,
+     "yaw": 180,
+     "pitch": 4,
+     "bend": 7,
+     "lKnee": 16,
+     "rKnee": 16,
+     "lHipF": 9,
+     "rHipF": 9,
+     "lShF": 55,
+     "lElb": 70,
+     "rShF": 50,
+     "rElb": 60,
+     "ik_r_lapel": 1,
+     "ik_l_sleeve": 1
+    }
+   ],
+   [
+    0.9,
+    {}
+   ],
+   [
+    1.3,
+    {
+     "z": 0.18,
+     "x": -0.02,
+     "pitch": 8,
+     "rHipF": 25,
+     "rKnee": 20,
+     "rHipA": -12
+    }
+   ],
+   [
+    1.6,
+    {
+     "rHipF": 30,
+     "rHipA": -30,
+     "rKnee": 10,
+     "pitch": 12,
+     "bend": 8
+    }
+   ],
+   [
+    1.95,
+    {
+     "plant": 0,
+     "y": 0.92,
+     "x": 0.12,
+     "z": 0.1,
+     "yaw": 195,
+     "pitch": -15,
+     "roll": -20,
+     "rHipF": 50,
+     "rHipA": -35,
+     "ik_r_lapel": 0,
+     "ik_l_sleeve": 0,
+     "ik_r_wrist": 1,
+     "lShF": 70,
+     "lShA": 40,
+     "head": 15
+    }
+   ],
+   [
+    2.3,
+    {
+     "y": 0.5,
+     "x": 0.42,
+     "z": 0.1,
+     "yaw": 225,
+     "pitch": -65,
+     "roll": -20
+    }
+   ],
+   [
+    2.65,
+    {
+     "pitch": -90,
+     "bend": 12,
+     "plant": 1,
+     "lHipF": 45,
+     "rHipF": 40,
+     "lKnee": 45,
+     "rKnee": 35,
+     "lShF": 25,
+     "lShA": 50,
+     "lElb": 5,
+     "rShF": 90,
+     "rShA": 10,
+     "rElb": 10,
+     "head": 40,
+     "ik_r_lapel": 0,
+     "ik_l_sleeve": 0,
+     "y": 0.15,
+     "x": 0.62,
+     "z": 0.12,
+     "yaw": 268,
+     "roll": -10,
+     "ik_r_wrist": 0
+    }
+   ],
+   [
+    3.6,
+    {
+     "rShF": 25,
+     "rShA": 50,
+     "rElb": 5
+    }
+   ],
+   [
+    4.1,
+    {
+     "rHipF": 30,
+     "lHipF": 30,
+     "head": 30
+    }
+   ],
+   [
+    5,
+    {}
+   ]
+  ]
+ }
+}

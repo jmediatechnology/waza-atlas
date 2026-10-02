@@ -1,0 +1,270 @@
+{
+ "format": "keyframes",
+ "version": 1,
+ "source": "Hand-keyed animation",
+ "duration": 5,
+ "phases": [
+  {
+   "t": 0,
+   "name": "Kumikata",
+   "en": "Gripping",
+   "text": "Right-handed grip: tori holds uke’s left lapel with the right hand and uke’s right sleeve with the left. Here uke attacks first."
+  },
+  {
+   "t": 1,
+   "name": "Kuzushi",
+   "en": "Breaking balance",
+   "text": "Uke steps in for a right o-soto-gari and swings the right leg through to reap."
+  },
+  {
+   "t": 1.5,
+   "name": "Tsukuri",
+   "en": "Entry",
+   "text": "Tori sinks the hips and stands firm, so uke’s reap meets a solid leg, and pulls uke in close."
+  },
+  {
+   "t": 1.95,
+   "name": "Kake",
+   "en": "Execution",
+   "text": "Tori reaps uke’s reaping leg first, with an o-soto-gari of tori’s own, driving uke back."
+  },
+  {
+   "t": 2.65,
+   "name": "Ukemi",
+   "en": "Breakfall",
+   "text": "Uke, caught on one leg, falls straight back."
+  }
+ ],
+ "tracks": {
+  "tori": [
+   [
+    0,
+    {
+     "z": -0.33,
+     "pitch": 5,
+     "bend": 8,
+     "lKnee": 16,
+     "rKnee": 16,
+     "lHipF": 9,
+     "rHipF": 9,
+     "lShF": 50,
+     "lElb": 60,
+     "rShF": 55,
+     "rElb": 70,
+     "ik_l_sleeve": 1,
+     "ik_r_lapel": 1
+    }
+   ],
+   [
+    0.9,
+    {
+     "bend": 9
+    }
+   ],
+   [
+    1.3,
+    {}
+   ],
+   [
+    1.6,
+    {
+     "lKnee": 35,
+     "rKnee": 35,
+     "lHipF": 25,
+     "rHipF": 25,
+     "pitch": 4
+    }
+   ],
+   [
+    1.95,
+    {
+     "x": -0.06,
+     "yaw": -10,
+     "pitch": 30,
+     "bend": 22,
+     "rHipF": -45,
+     "rKnee": 5,
+     "lHipF": 55,
+     "lKnee": 30,
+     "head": -8
+    }
+   ],
+   [
+    2.4,
+    {
+     "pitch": 42,
+     "bend": 30,
+     "rHipF": -70,
+     "lHipF": 64
+    }
+   ],
+   [
+    3.1,
+    {
+     "pitch": 24,
+     "bend": 34,
+     "roll": 0,
+     "twist": 0,
+     "ik_r_lapel": 0,
+     "rShF": 50,
+     "rShA": 15,
+     "rElb": 40,
+     "rHipF": 20,
+     "rKnee": 20,
+     "lHipF": 40,
+     "lKnee": 30
+    }
+   ],
+   [
+    3.8,
+    {
+     "ik_l_sleeve": 0,
+     "lShF": 45,
+     "lShA": 0,
+     "lElb": 50
+    }
+   ],
+   [
+    4.5,
+    {
+     "pitch": 8,
+     "bend": 14,
+     "twist": 0,
+     "roll": 0,
+     "lHipF": 12,
+     "rHipF": 12,
+     "lKnee": 16,
+     "rKnee": 16,
+     "lHipA": 7,
+     "rHipA": 7,
+     "head": 4,
+     "yaw": 0
+    }
+   ],
+   [
+    5,
+    {}
+   ]
+  ],
+  "uke": [
+   [
+    0,
+    {
+     "z": 0.33,
+     "yaw": 180,
+     "pitch": 4,
+     "bend": 7,
+     "lKnee": 16,
+     "rKnee": 16,
+     "lHipF": 9,
+     "rHipF": 9,
+     "lShF": 55,
+     "lElb": 70,
+     "rShF": 50,
+     "rElb": 60,
+     "ik_r_lapel": 1,
+     "ik_l_sleeve": 1
+    }
+   ],
+   [
+    0.9,
+    {}
+   ],
+   [
+    1.3,
+    {
+     "x": -0.1,
+     "z": 0.18,
+     "yaw": 190,
+     "rHipF": 10,
+     "lHipF": 30,
+     "lKnee": 25,
+     "pitch": 6
+    }
+   ],
+   [
+    1.6,
+    {
+     "x": -0.14,
+     "z": 0.04,
+     "yaw": 195,
+     "pitch": 14,
+     "bend": 12,
+     "rHipF": 55,
+     "rKnee": 15,
+     "lHipF": 22,
+     "lKnee": 22
+    }
+   ],
+   [
+    1.95,
+    {
+     "plant": 0,
+     "y": 0.85,
+     "x": -0.14,
+     "z": 0.18,
+     "pitch": -35,
+     "rHipF": 60,
+     "rKnee": 10,
+     "lHipF": 30,
+     "ik_r_lapel": 0,
+     "ik_l_sleeve": 0,
+     "lShF": 70,
+     "lShA": 40,
+     "rShF": 60,
+     "rShA": 35,
+     "head": 18
+    }
+   ],
+   [
+    2.3,
+    {
+     "y": 0.42,
+     "z": 0.62,
+     "pitch": -72
+    }
+   ],
+   [
+    2.65,
+    {
+     "pitch": -90,
+     "bend": 12,
+     "plant": 1,
+     "lHipF": 45,
+     "rHipF": 40,
+     "lKnee": 45,
+     "rKnee": 35,
+     "lShF": 25,
+     "lShA": 50,
+     "lElb": 5,
+     "rShF": 25,
+     "rShA": 50,
+     "rElb": 5,
+     "head": 40,
+     "ik_r_lapel": 0,
+     "ik_l_sleeve": 0,
+     "y": 0.15,
+     "x": -0.14,
+     "z": 0.86,
+     "yaw": 195
+    }
+   ],
+   [
+    3.6,
+    {}
+   ],
+   [
+    4.1,
+    {
+     "rHipF": 30,
+     "lHipF": 30,
+     "head": 30
+    }
+   ],
+   [
+    5,
+    {}
+   ]
+  ]
+ }
+}

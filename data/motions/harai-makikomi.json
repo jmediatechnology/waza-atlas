@@ -1,0 +1,353 @@
+{
+ "format": "keyframes",
+ "version": 1,
+ "source": "Hand-keyed animation",
+ "duration": 5,
+ "phases": [
+  {
+   "t": 0,
+   "name": "Kumikata",
+   "en": "Gripping",
+   "text": "Right-handed grip: tori holds uke’s left lapel with the right hand and uke’s right sleeve with the left."
+  },
+  {
+   "t": 1,
+   "name": "Kuzushi",
+   "en": "Breaking balance",
+   "text": "Tori pulls uke to the right front corner and lets go of the lapel."
+  },
+  {
+   "t": 1.5,
+   "name": "Tsukuri",
+   "en": "Entry",
+   "text": "Tori traps uke’s right arm under the right armpit and turns in with the right hip against uke."
+  },
+  {
+   "t": 2.2,
+   "name": "Kake",
+   "en": "Execution",
+   "text": "Tori sweeps uke’s right thigh with the straight right leg and rolls forward, winding uke round the body."
+  },
+  {
+   "t": 3,
+   "name": "Ukemi",
+   "en": "Breakfall",
+   "text": "Uke lands on the back with tori on top."
+  }
+ ],
+ "tracks": {
+  "tori": [
+   [
+    0,
+    {
+     "z": -0.33,
+     "pitch": 5,
+     "bend": 8,
+     "lKnee": 16,
+     "rKnee": 16,
+     "lHipF": 9,
+     "rHipF": 9,
+     "lShF": 50,
+     "lElb": 60,
+     "rShF": 55,
+     "rElb": 70,
+     "ik_l_sleeve": 1,
+     "ik_r_lapel": 1
+    }
+   ],
+   [
+    0.9,
+    {
+     "bend": 9
+    }
+   ],
+   [
+    1.4,
+    {
+     "z": -0.12,
+     "yaw": 40,
+     "rHipF": 35,
+     "rKnee": 45,
+     "lKnee": 35,
+     "lHipF": 20,
+     "lShF": 72,
+     "lElb": 30,
+     "bend": 12,
+     "ik_r_lapel": 0,
+     "rShF": 100,
+     "rShA": 20,
+     "rElb": 30
+    }
+   ],
+   [
+    1.7,
+    {
+     "z": 0,
+     "yaw": 120,
+     "lKnee": 65,
+     "rKnee": 60,
+     "lHipF": 35,
+     "rHipF": 38
+    }
+   ],
+   [
+    1.95,
+    {
+     "z": 0.08,
+     "yaw": 168,
+     "pitch": 12,
+     "bend": 18,
+     "lHipF": 30,
+     "rHipF": 28,
+     "lKnee": 50,
+     "rKnee": 45,
+     "lHipA": 14,
+     "rHipA": 14,
+     "head": 5,
+     "ik_r_sleeve_s": 1,
+     "x": 0.02
+    }
+   ],
+   [
+    2.35,
+    {
+     "pitch": 45,
+     "bend": 35,
+     "twist": 15,
+     "head": 15,
+     "rHipF": -45,
+     "rHipA": 18,
+     "rKnee": 10,
+     "lKnee": 35
+    }
+   ],
+   [
+    2.7,
+    {
+     "plant": 0,
+     "y": 0.75,
+     "z": -0.25,
+     "pitch": 75,
+     "bend": 30,
+     "twist": 25,
+     "roll": 20,
+     "lHipF": 30,
+     "rHipF": -60,
+     "lKnee": 30,
+     "rKnee": 5,
+     "rHipA": 15
+    }
+   ],
+   [
+    3.05,
+    {
+     "plant": 0,
+     "y": 0.4,
+     "pitch": 78,
+     "roll": 30,
+     "bend": 15,
+     "lHipF": 5,
+     "rHipF": 5,
+     "lKnee": 20,
+     "rKnee": 20,
+     "lHipA": 15,
+     "rHipA": 15,
+     "head": 20,
+     "z": -0.62,
+     "x": 0.14,
+     "ik_r_sleeve_s": 1
+    }
+   ],
+   [
+    3.9,
+    {
+     "ik_r_sleeve_s": 0,
+     "ik_l_sleeve": 0,
+     "lShF": 60,
+     "rShF": 60,
+     "lElb": 40,
+     "rElb": 40
+    }
+   ],
+   [
+    4.4,
+    {
+     "plant": 1,
+     "y": 0.4,
+     "pitch": 40,
+     "roll": 0,
+     "bend": 30,
+     "lHipF": 90,
+     "rHipF": 90,
+     "lKnee": 100,
+     "rKnee": 100,
+     "z": -0.45
+    }
+   ],
+   [
+    5,
+    {
+     "pitch": 20,
+     "bend": 25
+    }
+   ]
+  ],
+  "uke": [
+   [
+    0,
+    {
+     "z": 0.33,
+     "yaw": 180,
+     "pitch": 4,
+     "bend": 7,
+     "lKnee": 16,
+     "rKnee": 16,
+     "lHipF": 9,
+     "rHipF": 9,
+     "lShF": 55,
+     "lElb": 70,
+     "rShF": 50,
+     "rElb": 60,
+     "ik_r_lapel": 1,
+     "ik_l_sleeve": 1
+    }
+   ],
+   [
+    0.9,
+    {}
+   ],
+   [
+    1.45,
+    {
+     "z": 0.31,
+     "pitch": 9,
+     "rHipF": 22,
+     "rKnee": 18,
+     "lHipF": -5,
+     "head": 4
+    }
+   ],
+   [
+    1.95,
+    {
+     "z": 0.34,
+     "pitch": 16,
+     "bend": 10,
+     "rHipF": 14,
+     "lHipF": 4,
+     "lKnee": 10,
+     "rKnee": 10,
+     "ik_r_lapel": 0,
+     "ik_l_sleeve": 0,
+     "rShF": 80,
+     "rShA": 40,
+     "rElb": 20,
+     "lShF": 45,
+     "lShA": 30,
+     "lElb": 40
+    }
+   ],
+   [
+    2.35,
+    {
+     "plant": 0,
+     "y": 1.1,
+     "z": 0.24,
+     "x": 0.08800000000000001,
+     "yaw": 180,
+     "pitch": 60,
+     "bend": 18,
+     "lHipF": 10,
+     "rHipF": -20,
+     "lKnee": 22,
+     "rKnee": 18,
+     "head": 15,
+     "rShF": 90,
+     "ik_r_wrist": 0
+    }
+   ],
+   [
+    2.6,
+    {
+     "y": 1.4,
+     "z": -0.0475,
+     "x": 0.22,
+     "yaw": 180,
+     "pitch": 130,
+     "bend": 8,
+     "lHipF": 20,
+     "rHipF": 16,
+     "lKnee": 40,
+     "rKnee": 30,
+     "roll": 8,
+     "lShF": 60,
+     "lShA": 45,
+     "rShF": 90,
+     "rShA": 20
+    }
+   ],
+   [
+    2.85,
+    {
+     "y": 0.8,
+     "z": -0.5225,
+     "x": 0.22,
+     "yaw": 180,
+     "pitch": 205,
+     "lHipF": 40,
+     "rHipF": 32,
+     "lKnee": 50,
+     "rKnee": 40,
+     "roll": 14
+    }
+   ],
+   [
+    3.05,
+    {
+     "pitch": 270,
+     "bend": 12,
+     "plant": 1,
+     "lHipF": 45,
+     "rHipF": 40,
+     "lKnee": 45,
+     "rKnee": 35,
+     "lShF": 30,
+     "lShA": 60,
+     "lElb": 5,
+     "rShF": 80,
+     "rShA": 30,
+     "rElb": 10,
+     "head": 40,
+     "ik_r_lapel": 0,
+     "ik_l_sleeve": 0,
+     "y": 0.16,
+     "z": -0.95,
+     "x": 0.22,
+     "yaw": 180,
+     "roll": 12,
+     "ik_r_wrist": 0
+    }
+   ],
+   [
+    3.6999999999999997,
+    {
+     "rShF": 25,
+     "rShA": 45,
+     "rElb": 5
+    }
+   ],
+   [
+    4.15,
+    {
+     "rHipF": 30,
+     "lHipF": 22,
+     "head": 28
+    }
+   ],
+   [
+    5,
+    {}
+   ]
+  ]
+ }
+}

@@ -1,0 +1,203 @@
+{
+ "format": "keyframes",
+ "version": 1,
+ "source": "Hand-keyed animation",
+ "duration": 5,
+ "phases": [
+  {
+   "t": 0,
+   "name": "Tsukuri",
+   "en": "Entry",
+   "text": "Uke stands over tori, who is sitting on the mat."
+  },
+  {
+   "t": 0.7,
+   "name": "Kime",
+   "en": "Securing control",
+   "text": "Tori drops onto the back and slides in, hooking the right leg round uke’s right leg from the inside."
+  },
+  {
+   "t": 1.5,
+   "name": "Kansetsu",
+   "en": "Lock",
+   "text": "Tori wraps uke’s right leg with both legs, the right foot over uke’s hip, so the knee is caught and twisted."
+  },
+  {
+   "t": 3.3,
+   "name": "Maitta",
+   "en": "Submission",
+   "text": "Tori turns the hips and pushes with the legs, twisting uke’s knee. Uke taps at once. Ashi-garami is prohibited in competition because it damages the knee."
+  }
+ ],
+ "tracks": {
+  "tori": [
+   [
+    0,
+    {
+     "x": 0,
+     "z": -0.35,
+     "yaw": 0,
+     "pitch": -35,
+     "plant": 1,
+     "bend": 10,
+     "lHipF": 80,
+     "rHipF": 80,
+     "lKnee": 90,
+     "rKnee": 90,
+     "lHipA": 20,
+     "rHipA": 20,
+     "lShF": 90,
+     "rShF": 90,
+     "lElb": 60,
+     "rElb": 60,
+     "ik_r_lapel": 0,
+     "ik_l_sleeve": 0
+    }
+   ],
+   [
+    0.7,
+    {
+     "z": -0.15,
+     "x": 0.05,
+     "pitch": -80,
+     "rHipF": 100,
+     "rKnee": 70,
+     "rHipA": -20,
+     "lHipF": 60,
+     "lKnee": 80
+    }
+   ],
+   [
+    1.5,
+    {
+     "x": 0.1,
+     "pitch": -88,
+     "rHipF": 115,
+     "rKnee": 90,
+     "lHipF": 95,
+     "lKnee": 100,
+     "lHipA": -10,
+     "roll": -15
+    }
+   ],
+   [
+    2.4,
+    {
+     "roll": -30,
+     "rHipA": -30
+    }
+   ],
+   [
+    3.3,
+    {}
+   ],
+   [
+    4.4,
+    {
+     "roll": 0,
+     "rHipF": 80,
+     "rKnee": 90,
+     "rHipA": 20,
+     "lHipF": 80,
+     "lKnee": 90,
+     "lHipA": 20,
+     "pitch": -60
+    }
+   ],
+   [
+    5,
+    {}
+   ]
+  ],
+  "uke": [
+   [
+    0,
+    {
+     "z": 0.3,
+     "yaw": 180,
+     "pitch": 20,
+     "bend": 15,
+     "lKnee": 30,
+     "rKnee": 30,
+     "lHipF": 30,
+     "rHipF": 30,
+     "lShF": 60,
+     "rShF": 60,
+     "lElb": 40,
+     "rElb": 40,
+     "ik_r_lapel": 0,
+     "ik_l_sleeve": 0
+    }
+   ],
+   [
+    0.7,
+    {
+     "rHipF": 40,
+     "rKnee": 50
+    }
+   ],
+   [
+    1.5,
+    {
+     "pitch": 35,
+     "bend": 20,
+     "rHipF": 55,
+     "rKnee": 70,
+     "rHipA": 15,
+     "lKnee": 40,
+     "head": 10
+    }
+   ],
+   [
+    2.4,
+    {
+     "roll": 12,
+     "pitch": 45
+    }
+   ],
+   [
+    3.3,
+    {
+     "lShF": 55,
+     "lShA": 35,
+     "lElb": 20
+    }
+   ],
+   [
+    3.48,
+    {
+     "lShF": 25,
+     "lShA": 45
+    }
+   ],
+   [
+    3.6599999999999997,
+    {
+     "lShF": 55,
+     "lShA": 35
+    }
+   ],
+   [
+    3.84,
+    {
+     "lShF": 25,
+     "lShA": 45
+    }
+   ],
+   [
+    4.4,
+    {
+     "roll": 0,
+     "pitch": 25,
+     "rHipF": 30,
+     "rKnee": 30,
+     "rHipA": 7
+    }
+   ],
+   [
+    5,
+    {}
+   ]
+  ]
+ }
+}

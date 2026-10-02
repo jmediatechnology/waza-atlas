@@ -1,0 +1,187 @@
+{
+ "format": "keyframes",
+ "version": 1,
+ "source": "Hand-keyed animation",
+ "duration": 5,
+ "phases": [
+  {
+   "t": 0,
+   "name": "Tsukuri",
+   "en": "Entry",
+   "text": "Both stand. Uke pushes at tori with the right hand."
+  },
+  {
+   "t": 0.7,
+   "name": "Kime",
+   "en": "Securing control",
+   "text": "Tori catches uke’s right wrist with both hands and turns the palm up."
+  },
+  {
+   "t": 1.5,
+   "name": "Kansetsu",
+   "en": "Lock",
+   "text": "Tori turns to uke’s right side and pulls the arm straight across tori’s chest, elbow joint against tori’s body."
+  },
+  {
+   "t": 3.3,
+   "name": "Maitta",
+   "en": "Submission",
+   "text": "Tori pulls the wrist down while pressing the elbow with the body. Uke rises onto the toes and taps."
+  }
+ ],
+ "tracks": {
+  "tori": [
+   [
+    0,
+    {
+     "z": -0.33,
+     "pitch": 5,
+     "bend": 8,
+     "lKnee": 16,
+     "rKnee": 16,
+     "lHipF": 9,
+     "rHipF": 9,
+     "lShF": 50,
+     "lElb": 60,
+     "rShF": 55,
+     "rElb": 70
+    }
+   ],
+   [
+    0.7,
+    {
+     "ik_l_wrist": 1,
+     "ik_r_wrist_s": 1
+    }
+   ],
+   [
+    1.5,
+    {
+     "x": 0.25,
+     "z": -0.05,
+     "yaw": -70,
+     "pitch": 10
+    }
+   ],
+   [
+    2.4,
+    {
+     "pitch": 18,
+     "bend": 12,
+     "lKnee": 30,
+     "rKnee": 30,
+     "lHipF": 30,
+     "rHipF": 30
+    }
+   ],
+   [
+    3.3,
+    {}
+   ],
+   [
+    4.4,
+    {
+     "ik_l_wrist": 0,
+     "ik_r_wrist_s": 0,
+     "pitch": 5,
+     "lShF": 50,
+     "rShF": 55
+    }
+   ],
+   [
+    5,
+    {}
+   ]
+  ],
+  "uke": [
+   [
+    0,
+    {
+     "z": 0.33,
+     "yaw": 180,
+     "pitch": 4,
+     "bend": 7,
+     "lKnee": 16,
+     "rKnee": 16,
+     "lHipF": 9,
+     "rHipF": 9,
+     "lShF": 55,
+     "lElb": 70,
+     "rShF": 70,
+     "rElb": 20,
+     "ik_r_lapel": 0,
+     "ik_l_sleeve": 0
+    }
+   ],
+   [
+    0.7,
+    {
+     "rShF": 80,
+     "rElb": 5
+    }
+   ],
+   [
+    1.5,
+    {
+     "rShF": 88,
+     "rShA": 25,
+     "rElb": 0,
+     "pitch": 18,
+     "bend": 10
+    }
+   ],
+   [
+    2.4,
+    {
+     "pitch": 30,
+     "bend": 15,
+     "lHipF": 20,
+     "rHipF": 20,
+     "lKnee": 5,
+     "rKnee": 5,
+     "head": 10
+    }
+   ],
+   [
+    3.3,
+    {
+     "lShF": 55,
+     "lShA": 35,
+     "lElb": 20
+    }
+   ],
+   [
+    3.48,
+    {
+     "lShF": 25,
+     "lShA": 45
+    }
+   ],
+   [
+    3.6599999999999997,
+    {
+     "lShF": 55,
+     "lShA": 35
+    }
+   ],
+   [
+    3.84,
+    {
+     "lShF": 25,
+     "lShA": 45
+    }
+   ],
+   [
+    4.4,
+    {
+     "pitch": 4,
+     "bend": 7
+    }
+   ],
+   [
+    5,
+    {}
+   ]
+  ]
+ }
+}

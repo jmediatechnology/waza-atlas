@@ -4,3 +4,4 @@
 /var/
 /vendor/
 /.phpunit.cache/
+.idea
